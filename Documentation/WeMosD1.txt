@@ -1,0 +1,6 @@
+https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/ - pinout
+https://www.mfitzp.com/article/wemos-d1-pins-micropython/ - pinout used for header file
+
+>>>> How to start using the wifi stuff
+>>>> Note: the wifi stuff is installed into Arduino, we only need to include the header
+https://www.instructables.com/Programming-a-HTTP-Server-on-ESP-8266-12E/

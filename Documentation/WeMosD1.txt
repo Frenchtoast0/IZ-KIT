@@ -4,3 +4,14 @@ https://www.mfitzp.com/article/wemos-d1-pins-micropython/ - pinout used for head
 >>>> How to start using the wifi stuff
 >>>> Note: the wifi stuff is installed into Arduino, we only need to include the header
 https://www.instructables.com/Programming-a-HTTP-Server-on-ESP-8266-12E/
+
+>>>> How to connect to wifi
+>>>> Super simple
+https://averagemaker.com/2018/04/how-to-set-up-wifi-on-a-wemos.html
+
+Serial monitor is icon electrical plug icon down on the bottom of PlatformIO
+
+SUPER HELPFUL unofficial Arduino+ESP8266 Docs => https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html
+
+NOTE: When using the NodeMCU with PlatformIO, you have to open the "NodeCode" folder by itself 
+(or as secondary file in workspace) or it won't be able to find the Arduino and Esp8266 libraries

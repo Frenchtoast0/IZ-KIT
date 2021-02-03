@@ -10,7 +10,7 @@ char pass[] = "passverd";   // your network password
 int status = WL_IDLE_STATUS;
 //IPAddress server(3,211,11,78); //http request dumper
 
-char server[] = "https://httpbin.org";
+char server[] = "httpbin.org";
 
 // Initialize the client library
 WiFiClient client;
@@ -33,7 +33,7 @@ void setup() {
     if (client.connect(server, 80)) {
       Serial.println("connected");
       // Make a HTTP request:
-      client.println("GET /anything HTTP/1.0");
+      client.println("GET /anything HTTPS/1.0");
       client.println();
 
       Serial.println(client.readString());

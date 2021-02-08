@@ -1,4 +1,3 @@
-<!--temporary spot until php setup is up-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

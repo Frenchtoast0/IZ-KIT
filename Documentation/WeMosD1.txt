@@ -13,5 +13,7 @@ Serial monitor is icon electrical plug icon down on the bottom of PlatformIO
 
 SUPER HELPFUL unofficial Arduino+ESP8266 Docs => https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html
 
+WIFI/HTTP stuff: https://diyprojects.io/esp8266-web-client-tcp-ip-communication-examples-esp8266wifi-esp866httpclient/#.YCIf8uhKjcs
+
 NOTE: When using the NodeMCU with PlatformIO, you have to open the "NodeCode" folder by itself 
 (or as secondary file in workspace) or it won't be able to find the Arduino and Esp8266 libraries

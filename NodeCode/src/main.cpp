@@ -16,7 +16,7 @@ String ssid = "NodeMCU";  //wifi SSID
 String pass = "passverd"; //wifi password
 
 String server = "https://thor.net.nait.ca"; //server of node control
-String url = "/~izkit/webservice.php";      //url on server to access
+String url = "/~izkit/svc/devices";      //url on server to access
 
 //runs once upon startup
 void setup()
@@ -27,7 +27,10 @@ void setup()
   Serial.begin(115200);
 
   //connect to wifi
-  if (!WifiConnect(ssid, pass)) Serial.println("Wifi connection failed!");
+  while (!WifiConnect(ssid, pass)) Serial.println("Wifi connection failed!");
+
+  //register device with server
+  Serial.println(SendPost_Result(server + url + "/register", "id=" + String(id) + "&state=" + String(state)));
 }
 
 //constantly repeats
@@ -44,8 +47,8 @@ void loop()
 
   if (lastState != state)
   {
-    //alert server
-    Serial.println(SendPost_Result(server + url, "id=" + String(id) + "&state=" + String(state)));
+    //update state on server
+    Serial.println(SendPost_Result(server + url + "/update", "id=" + String(id) + "&state=" + String(state)));
     lastState = state;
   }
 }

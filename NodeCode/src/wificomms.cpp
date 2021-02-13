@@ -56,7 +56,7 @@ String SendPost_Result(String url, String data)
 
     //send post request
     https.addHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpCode = https.POST("action=testX");
+    httpCode = https.POST(data);
 
     //http did not error
     if (httpCode > 0)
@@ -66,7 +66,9 @@ String SendPost_Result(String url, String data)
       {
         result = https.getString();
       }
+      else result = "Post failed: HttpCode:" + String(httpCode);
     }
+    else result = "Post failed: HttpCode:" + String(httpCode);
 
     //clean up connection
     https.end();
@@ -91,7 +93,7 @@ bool SendPost(String url, String data)
 
     //send post request
     https.addHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpCode = https.POST("action=testX");
+    httpCode = https.POST(data);
 
     //http did not error
     if (httpCode > 0)

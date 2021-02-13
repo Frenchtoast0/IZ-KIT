@@ -1,0 +1,6 @@
+REST API stuff:
+
+User stuff: /svc/users/register
+
+Device stuff: /svc/devices/register
+              /svc/devices/update

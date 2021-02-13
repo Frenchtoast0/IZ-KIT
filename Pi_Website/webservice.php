@@ -5,10 +5,9 @@
 $data = array(); //global data array
 $status = "Fail : Action failed to match!";
 
-//check for get users action
-//if (isset($_GET["action"]) && $_GET["action"] == "GetUsers") GetUsers();
 
-if (isset($_POST["action"]) && $_POST["action"] == "Test") Test();
+if (isset($_GET["action"]) && $_GET["action"] == "test") Test();
+if (isset($_POST["action"]) && $_POST["action"] == "testX") Test();
 
 //get user data dump from db
 function GetUsers()
@@ -23,8 +22,10 @@ function GetUsers()
 
 function Test()
 {
-    $params["response"] = "Test successful";
-    $params["status"] = true;
+    global $data, $status;
+
+    $data = "Test successful";
+    $status = true;
 }
 
 //return processed response

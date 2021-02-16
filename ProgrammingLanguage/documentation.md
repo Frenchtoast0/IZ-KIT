@@ -2,21 +2,21 @@
 
 ### Sample Code ###
 ```js
-pushButton = high causes ledLight = high;
+pushButton == high causes ledLight = high;
 
-pushButton = high and lightSensor >= 0.5 causes ledLight = high and ledLight2 = high;
+pushButton == high and lightSensor >= 0.5 causes ledLight = high and ledLight2 = high;
 
-start Timer 50; //runs timer
+Timer == high causes ledLight = low;
 
-Timer = high causes ledLight = low;
+pushButton == high causes start Timer 50;
 
-pushButton = high causes start Timer 50;
+pushButton == low causes Timer = low; //clears timer
 
-pushButton = low causes Timer = low; //clears timer
+lcdOutput == "Hello, world!"; //standalone command
 
-lcdOutput = "Hello, world!"; //standalone command
+pushButton == high causes lcdOutput = "Hello, World";
 
-pushButton = high causes lcdOutput = "Hello, World";
+discordBot == "bonjour" causes ledLight = high;
 
 ```
 

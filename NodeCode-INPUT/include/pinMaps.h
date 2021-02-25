@@ -1,4 +1,9 @@
-// Defines NodeMCU(WeMos D1 mini) pins with corresponding GPIO pins
+//**************************************************
+// File: pinmaps.h
+// Author: Isaac Wittmeier
+// Description: Defines NodeMCU(WeMos D1 mini) 
+//                      pins with corresponding GPIO pins
+//**************************************************
 #define D0 16 //GPIO
 #define D1 5  //GPIO, I2C SCL
 #define D2 4  //GPIO, I2C SDA

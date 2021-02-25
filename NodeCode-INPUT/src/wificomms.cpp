@@ -11,7 +11,7 @@
 #include "wificomms.h"
 
 BearSSL::WiFiClientSecure client; //for https connection
-HTTPClient https;        //for http communications
+HTTPClient https;                 //for http communications
 
 //Starts wifi connection with
 //specified ssid and password

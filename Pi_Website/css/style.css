@@ -35,3 +35,8 @@ input{
     width: 25vw;
     margin: auto;
 }
+
+.alert{
+    position: absolute;
+    width: 100%;
+}

@@ -28,7 +28,7 @@ int LightValueRead()
     return (int)percentage;
 }
 
-//updates state and returns if state changed
+//updates state and returns true if state changed
 bool LightSensorRead(String* state)
 {
     int light = LightValueRead(); //get new light intensity

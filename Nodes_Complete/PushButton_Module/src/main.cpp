@@ -6,8 +6,8 @@
 #include <Arduino.h>
 #include "pinMaps.h"
 #include "config.h"
-#include "lightSensor.h"
-#include "analogRead.h"
+#include "gpioRead.h"
+#include "pushButton.h"
 
 String state = "Initial"; //current state
 
@@ -24,7 +24,7 @@ void setup()
 void loop()
 {
   //state changed, display 
-  if (LightSensorRead(&state)) Serial.println(state);
+  if (PushButtonRead(&state)) Serial.println(state);
 
   //pause
   delay(10);

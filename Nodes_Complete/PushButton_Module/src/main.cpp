@@ -17,6 +17,10 @@ void setup()
   //start serial communications
   Serial.begin(115200);
 
+  //initialize pin for input
+  int pins[] = {D0};
+  GPIOSetup(pins, 1, false);
+
   Serial.println("done");
 }
 

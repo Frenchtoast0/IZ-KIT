@@ -1,3 +1,4 @@
+/*
 //**************************************************
 // File: Main.cpp
 // Author: Isaac Wittmeier
@@ -6,8 +7,6 @@
 #include <Arduino.h>
 #include "pinMaps.h"
 #include "config.h"
-#include "gpioRead.h"
-#include "pushButton.h"
 
 String state = "Initial"; //current state
 
@@ -17,15 +16,12 @@ void setup()
   //start serial communications
   Serial.begin(115200);
 
-  InitPushButton();
 }
 
 //constantly repeats
 void loop()
 {
-  //state changed, display 
-  if (PushButtonRead(&state)) Serial.println(state);
 
   //pause
   delay(10);
-}
+}*/

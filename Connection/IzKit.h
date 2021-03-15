@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
-//add name sapce 
+
 namespace IzKit
 {
   class Device

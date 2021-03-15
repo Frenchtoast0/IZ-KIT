@@ -1,7 +1,7 @@
 //**************************************************
 // File: gpioRead.h
 // Author: Isaac Wittmeier
-// Description: Returns the states of GPIO pins
+// Description: Returns/modifies the states of GPIO pins
 //**************************************************
 #include <Arduino.h>
 

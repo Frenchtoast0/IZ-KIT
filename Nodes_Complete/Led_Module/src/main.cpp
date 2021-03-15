@@ -7,7 +7,7 @@
 #include "pinMaps.h"
 #include "config.h"
 #include "gpio.h"
-#include "pushButton.h"
+#include "led.h"
 
 String state = "Initial"; //current state
 
@@ -17,15 +17,21 @@ void setup()
   //start serial communications
   Serial.begin(115200);
 
-  InitPushButton();
+  InitLed();
 }
 
 //constantly repeats
 void loop()
 {
-  //state changed, display 
-  if (PushButtonRead(&state)) Serial.println(state);
+  //respond based on state
+  if (state == "ON") ledOn();
+  if (state == "OFF" || state == "Initial") ledOff();
 
   //pause
   delay(10);
+
+  delay(100);
+
+  if (state == "OFF" || state == "Initial") state = "ON";
+  if (state == "ON") state = "OFF";
 }

@@ -5,7 +5,7 @@
 //**************************************************
 #include <Arduino.h>
 #include "pinMaps.h"
-#include "gpioRead.h"
+#include "gpio.h"
 
 //initializes the pushbutton module
 void InitPushButton();

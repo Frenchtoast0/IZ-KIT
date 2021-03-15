@@ -9,7 +9,7 @@ int Device::port = 10001;
 WiFiClient Device::client; //= WiFiClient();
 
 //connectes to wifi 
-void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
+void Device::ConnectWifi(const String ssid, const char* pass, int v = 0)
 {
     WiFi.begin(ssid,pass);
     while (WiFi.status() != WL_CONNECTED)
@@ -43,7 +43,7 @@ Device::Device(char id,String value)
  
 }
 
-void Device::addInfo(String desc,int io)
+void Device::addInfo(String desc, int io)
 {
    //cant register more then once
    if(regist) return;
@@ -58,7 +58,7 @@ void Device::addInfo(String desc,int io)
    regist = 1;
 }
 
-void Device::getUpdate(int v=0)
+void Device::getUpdate(int v = 0)
 {
     if(!regist)
     {

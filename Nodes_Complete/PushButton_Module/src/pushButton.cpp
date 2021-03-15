@@ -6,7 +6,7 @@
 #include <Arduino.h>
 #include "pinMaps.h"
 #include "pushButton.h"
-#include "gpioRead.h"
+#include "gpio.h"
 
 //initialize pushbutton module
 void InitPushButton()

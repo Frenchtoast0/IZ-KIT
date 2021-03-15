@@ -6,10 +6,9 @@ using namespace IzKit;
 
 IPAddress Device::server(199,185,50,206);
 int Device::port = 10001;
-WiFiClient Device::client; //= WiFiClient();
+WiFiClient Device::client;
 
-//connectes to wifi 
-void Device::ConnectWifi(const String ssid, const char* pass, int v = 0)
+void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
 {
     WiFi.begin(ssid,pass);
     while (WiFi.status() != WL_CONNECTED)
@@ -43,22 +42,19 @@ Device::Device(char id,String value)
  
 }
 
-void Device::addInfo(String desc, int io)
+void Device::addInfo(String desc,int io)
 {
-   //cant register more then once
    if(regist) return;
-   //register with device
     
    ConnectClient(1);
    Serial.println(id);
-   //for some reason this would not work on one line
    client.print(id);
    client.println('|'+desc+'|'+io+'|'+value); 
    while(!client.available());
    regist = 1;
 }
 
-void Device::getUpdate(int v = 0)
+void Device::getUpdate(int v=0)
 {
     if(!regist)
     {
@@ -76,10 +72,6 @@ void Device::getUpdate(int v = 0)
     this->value = client.readString();
 }
 
-/*
-forceably updates the server, note this 
-dose not update the value
-*/
 void Device::setValue(String val, int v=0)
 {
     if(!regist)
@@ -90,7 +82,7 @@ void Device::setValue(String val, int v=0)
     Serial.println("Connecting to client");
     ConnectClient(v);
     client.println(id);
-    client.println(val);
+    client.println('|'+val);
     getUpdate(0);
     
     Serial.println("Value was changed to");
@@ -98,9 +90,9 @@ void Device::setValue(String val, int v=0)
     
     
 }
+
 String Device::getValue()
 {
     return value;
 }
 
-//TODO make a to string function

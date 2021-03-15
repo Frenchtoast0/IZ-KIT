@@ -4,26 +4,19 @@
 #include <ESP8266WiFi.h>
 
 
-//working
+//this namespace is required for using the object
 using namespace IzKit;
-int w = 1;
-//yes tecnically you can have mutiple devices
+//this is a constructor, takes id,value
 Device dev('5',"on");
 
 void setup() {
   Serial.begin(115200);
-  //a static helper to let you connect to wifi
+  //example use of this code, read header for details
   dev.ConnectWifi("SHAW-178D20","25114C023072",1);
-  dev.addInfo("Danky is best boi",1);
-  //dev.setValue("TEST",1);
+  dev.addInfo("This Description Is a Example",1);
+  dev.setValue("off",1);
   Serial.println(dev.getValue());
 }
 
 void loop() {
-
-  if(w) // 0 dosent make it flase 
-  {
-    Serial.println("HELLO WORLd");
-    w=0;
-  }
 }

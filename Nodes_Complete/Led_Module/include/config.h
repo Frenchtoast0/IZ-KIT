@@ -3,7 +3,7 @@
 // Author: Isaac Wittmeier
 // Description: Values specific to node
 //**************************************************
-#define NODE_TYPE "output"       //whether the node is an input or an output
+#define NODE_IO 1        //whether the node is an input(0) or an output(1)
 #define NODE_Name "led"  //what kind of node it is
 
 //description of node functionality

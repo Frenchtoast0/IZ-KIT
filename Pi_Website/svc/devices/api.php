@@ -17,8 +17,8 @@ class MyAPI extends API {
     //  return $this->_response("Get Lost", 403);
   }
 
-  //register device endpoint
-  protected function register(){
+  //programming device endpoint
+  protected function program(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
@@ -27,15 +27,13 @@ class MyAPI extends API {
 
     if ($this->method == "POST")
     {
-      $r["data"] = "connected";
-      $r["status"] = "success";
-
-      return RegisterDevice($this->request);
+      $json = file_get_contents("php://input");
+      return UploadProgram($json);
     } 
   }
 
-  //receive device state info endpoint
-  protected function update(){
+  //send admin command endpoint
+  protected function admin(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
@@ -44,7 +42,8 @@ class MyAPI extends API {
 
     if ($this->method == "POST")
     {
-      return UpdateDevice($this->request);
+      $json = file_get_contents("php://input");
+      return SendAdmin($json);
     } 
   }
 }

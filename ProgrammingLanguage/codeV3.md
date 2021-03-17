@@ -17,5 +17,5 @@ wire ctn_name
 ```
 
 Similar to LARA configuration language.
-Declare inputs, declare outputs
-Everything in meta in
+Declare inputs, declare outputs, define what causes output to fire.
+Everything in meta ignored.

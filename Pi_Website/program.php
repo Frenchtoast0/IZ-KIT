@@ -14,16 +14,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/program.js"></script>
+    <script src="./js/ajax.js"></script>
     <title>IZ-Kit Program</title>
 </head>
 <body class="text-center text-white bg-dark">
     <main>
         <section id="MainBox">
             <h1>Program the IZ-Kit Controller</h1>
+            
             <form class="mx-auto">
-                <textarea id="program" class="form-control"></textarea>
-                <button type="submit" class="btn btn-md btn-success mt-1">Upload</button>
+                <textarea id="code" class="form-control"></textarea>
+                <button type="button" id="uploadButton" class="btn btn-md btn-success mt-1">Upload</button>
             </form>
+
+            <label id="status"></label>
+
             <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
         </section>
     </main>

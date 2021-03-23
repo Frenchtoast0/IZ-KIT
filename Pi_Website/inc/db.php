@@ -13,7 +13,7 @@ function SQLi_Connect()
     $mysqli = new mysqli("localhost", "izkit_dbuser", "DBpassword!$", "izkit_db");
 
     //connection failed, exit with error code
-    if ($mysqli -> connect_error)
+    if ($mysqli->connect_error)
     {
         $mysqli_status = "Connect Error ({$mysqli->connect_errno}) {$mysqli->connect_error}";
         die(); //exit after closing outstanding things
@@ -68,6 +68,13 @@ function SQLi_NonQuery($query)
 
     //return result count
     return $mysqli->affected_rows;
+}
+
+//returns the last inputted ID
+function SQLi_InsertID()
+{
+    global $mysqli;
+    return $mysqli->insert_id;
 }
 
 SQLi_Connect(); //connect on every page this is added to

@@ -22,15 +22,10 @@
 <body class="text-center text-white bg-dark">
     <main>
         <section id="MainBox" class="space-top-little">
-            <h1>Program the IZ-Kit Controller</h1>
-            
-            <form>
-                <textarea id="code" class="form-control"></textarea>
-                <button type="button" id="uploadButton" class="btn btn-md btn-success mt-1">Upload</button>
-            </form>
-
+            <h1>Admin Panel</h1>
+        
             <label id="status"></label>
-
+            
             <a href="./index.php">Back</a>
 
             <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>

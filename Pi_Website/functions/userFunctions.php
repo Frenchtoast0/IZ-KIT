@@ -4,7 +4,6 @@
 // Description: collection of user functions
 //              to interface with db
 //************************************************
-
 include_once "./inc/db.php";
 
 //adds a new user to the db
@@ -50,13 +49,13 @@ function CreateUser($params)
         $uname = $params["username"];
         $pword = password_hash($params["password"], PASSWORD_DEFAULT);
     
-        $checkQuery = "SELECT * FROM Users WHERE username = '$uname'";
+        $checkQuery = "SELECT * FROM Users WHERE Username = '$uname'";
         
         //make sure user doesn't exist already
         if (SQLi_NonQuery($checkQuery) <= 0)
         {
             //query to add user
-            $query = "INSERT INTO Users (username, password) VALUES (\"$uname\", \"$pword\")";
+            $query = "INSERT INTO Users (Username, Password) VALUES (\"$uname\", \"$pword\")";
 
             $rows = SQLi_NonQuery($query);
 
@@ -89,7 +88,7 @@ function ValidateUser($params)
 {
     session_start();
 
-    $query = "SELECT userID, username, password FROM Users WHERE username = '{$params["username"]}'";
+    $query = "SELECT ID, Username, password FROM Users WHERE Username = '{$params["username"]}'";
 
     $result = null; //login query result
     $row = null;    //login query result row
@@ -106,8 +105,8 @@ function ValidateUser($params)
             case 1:
                 if (password_verify($params["password"], ($row["password"])))
                 {
-                    $_SESSION["username"] = $row["username"];
-                    $_SESSION["userID"] = $row["userID"];
+                    $_SESSION["username"] = $row["Username"];
+                    $_SESSION["userID"] = $row["ID"];
 
                     $params["response"] = "Successfully authenticated!";
                     $params["status"] = true;

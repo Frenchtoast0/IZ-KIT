@@ -27,7 +27,7 @@ class MyAPI extends API {
 
     if ($this->method == "POST")
     {
-      $json = file_get_contents("php://input");
+      $json = $this->request; //file_get_contents("php://input");
       return UploadProgram($json);
     } 
   }
@@ -42,7 +42,7 @@ class MyAPI extends API {
 
     if ($this->method == "POST")
     {
-      $json = file_get_contents("php://input");
+      $json = $this->request; //file_get_contents("php://input");
       return SendAdmin($json);
     } 
   }

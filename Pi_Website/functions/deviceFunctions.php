@@ -4,6 +4,8 @@
 // Description: collection of device functions
 //              to interface with db
 //************************************************
+require_once "../../inc/db.php"; //connect to db
+
 /*
 //register device in db
 //$postData - POST data in
@@ -47,25 +49,57 @@ function UpdateDevice($postData)
 */
 
 //uploads a new program to the devices
-//$postData - program text string
+//$wire - program connection info
 //return - successfulness of create
-function UploadProgram($postData)
+function UploadProgram($wire)
 {
     $data = array(); //json data value
     $status = false; //json success value
 
-    $code = json_decode($postData);
+    //get circuit name
+    $name = $wire["Name"];
 
-    //loop through wire blocks
-    foreach($code as $key=>$value)
+    //setup circuit on sql end
+    $query = "INSERT INTO Circuits (Name) VALUES ('$name')";
+    SQLi_NonQuery($query);
+    $circuitID = SQLi_InsertID();
+
+    //get inputs
+    foreach($wire["Inputs"] as $input)
     {
-        //debug, send out kvp pairs
-        $data[$key] = $value;
+        $id = $input["ID"];
+        $sign = $input["Sign"];
+        $value = $input["Value"]; 
+
+        //sql insert input
+        $query = "INSERT INTO Input (DevID, Sign, OnVal) VALUES ('$id', '$sign', '$value')";
+        SQLi_NonQuery($query);
+        $inputID = SQLi_InsertID();
+
+        //insert connection to circuit
+        $query = "INSERT INTO CircuitToInput (InID, CrID) VALUES ('$inputID', '$circuitID')";
+        SQLi_NonQuery($query);
+    }
+
+    //get outputs
+    foreach($wire["Outputs"] as $output)
+    {
+        $id = $output["ID"];
+        $value = $output["Value"]; 
+
+        //sql insert
+        $query = "INSERT INTO Output (DevID, SetVal) VALUES ('$id', '$value')";
+        SQLi_NonQuery($query);
+        $outputID = SQLi_InsertID();
+
+        //insert connection to circuit
+        $query = "INSERT INTO CircuitToOutput (OtID, CrID) VALUES ('$outputID', '$circuitID')";
+        SQLi_NonQuery($query);
     }
 
     //package and send function values
     $response["data"] = $data;
-    $response["status"] = $status;
+    $response["status"] = true;
     return $response;
 }
 

@@ -100,7 +100,7 @@ abstract class API {
         $clean_input[$k] = $this->_cleanInputs($v);
       }
     } else {
-      $clean_input = trim(strip_tags($data));
+      $clean_input = trim($data);
     }
     return $clean_input;
   }

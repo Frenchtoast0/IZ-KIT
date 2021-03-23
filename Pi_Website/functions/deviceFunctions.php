@@ -70,7 +70,9 @@ function UploadProgram($wire)
         $id = $input["ID"];
         $sign = $input["Sign"];
         $value = $input["Value"]; 
-
+	
+	    error_log(join($input,','));
+	    error_log($sign); 
         //sql insert input
         $query = "INSERT INTO Input (DevID, Sign, OnVal) VALUES ('$id', '$sign', '$value')";
         SQLi_NonQuery($query);
@@ -98,7 +100,7 @@ function UploadProgram($wire)
     }
 
     //package and send function values
-    $response["data"] = $wire;
+    $response["data"] = $data;
     $response["status"] = true;
     return $response;
 }

@@ -7,16 +7,22 @@
 //this namespace is required for using the object
 using namespace IzKit;
 //this is a constructor, takes id,value
-Device dev('5',"on");
-
+Device dev("PSB-002",0);
+int stop = 1;
 void setup() {
   Serial.begin(115200);
   //example use of this code, read header for details
   dev.ConnectWifi("SHAW-178D20","25114C023072",1);
-  dev.addInfo("This Description Is a Example",1);
-  dev.setValue("off",1);
-  Serial.println(dev.getValue());
+  //do once to set value, ONLY DO IF IT IS A INPUT, 1=INPUTS
+  dev.setValue("123213",1);
+  dev.addInfo("This Description Is a Example");
 }
 
 void loop() {
+  //returns true if update, 
+  if(dev.CheckUpdate(1) && stop)  //only do if dev is a output
+  {
+    Serial.println("REEEEE:"+dev.getValue());
+    stop = 0;
+  }
 }

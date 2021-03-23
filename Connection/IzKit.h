@@ -2,6 +2,14 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 
+/*
+    TODO
+          create a abstract/parent class called device
+          two children called Input, Output
+*/
+
+
+//add name sapce 
 namespace IzKit
 {
   class Device
@@ -18,9 +26,10 @@ namespace IzKit
         the reason these are private is becuase changing them will 
         mess up communication with server
       */
-      char id;                          //Device ID on socket server            
+      String id;                          //Device ID on socket server            
       String value;                     //value Device has 
       int regist = 0;                   //Determins if device is registered in server
+      int io;
 
     public:
       //hadning function for connecting to a network take it or leave it 
@@ -30,7 +39,7 @@ namespace IzKit
       int getId();
 
       //registers device, this info is only saved on server since you shouldnt be changing it  
-      void addInfo(String desc,int io);
+      void addInfo(String desc);
       
       //[BLOCKING] sets the value of device and value on server, updates from server overide value
       // will not run untill addInfo() is called
@@ -41,10 +50,10 @@ namespace IzKit
 
       //[BLOCKING] sets value to current server state
       //will not run untill addInfo() is called
-      void getUpdate(int v);          
+      int CheckUpdate(int v);          
       
       //constructor 
-      Device(char id,String value);
+      Device(String id,int io);
 
       /* Things to note
             all communcation with server is blocking 

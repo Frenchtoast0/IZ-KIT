@@ -33,17 +33,16 @@ class MyAPI extends API {
   }
 
   //send admin command endpoint
-  protected function admin(){
+  protected function adminLoad(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
     $resp["verb"] = $this->verb;
     $resp["args"] = $this->args;
 
-    if ($this->method == "POST")
+    if ($this->method == "GET")
     {
-      $json = $this->request; //file_get_contents("php://input");
-      return SendAdmin($json);
+      return GetDevices();
     } 
   }
 }

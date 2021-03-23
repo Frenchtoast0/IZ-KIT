@@ -53,7 +53,7 @@ function UploadCode()
         it["ID"] = inputs[i].match(/[a-z\-0-9]*(?=[<=>][<=>])/gmi)[0];
         it["Sign"] = inputs[i].match(/[=><]=/gmi)[0];
 
-        if (it["Sign"] == "<=") it["Sign"] = "&lt;";
+        if (it["Sign"] == "<=") it["Sign"] = "\<=";
 
         it["Value"] = inputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
 

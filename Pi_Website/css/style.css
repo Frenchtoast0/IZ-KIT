@@ -21,7 +21,7 @@ h1{
     padding-top: 3%;
 }
 
-main{
+#MainBox{
     width: 60%;
     margin: auto
 }
@@ -50,4 +50,9 @@ input{
     width: 30vw;
     margin-left: auto;
     margin-right: auto;
+}
+
+#DeviceCards {
+    display: flex;
+    justify-content: center;
 }

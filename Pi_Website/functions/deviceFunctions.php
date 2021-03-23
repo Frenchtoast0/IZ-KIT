@@ -98,28 +98,16 @@ function UploadProgram($wire)
     }
 
     //package and send function values
-    $response["data"] = $data;
+    $response["data"] = $wire;
     $response["status"] = true;
     return $response;
 }
 
-//sends an admin command to the devices
-//$postData - program text string
-//return - successfulness of send
-function SendAdmin($postData)
+//returns a list of the devices in the db
+
+function GetDevices()
 {
-    $data = array(); //json data value
-    $status = false; //json success value
 
-    $code = json_decode($postData);
-
-    //debug, simple return
-    $data = $code;
-
-    //package and send function values
-    $response["data"] = $data;
-    $response["status"] = $status;
-    return $response;
 }
 
 ?>

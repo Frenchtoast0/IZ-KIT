@@ -10,10 +10,10 @@
 #include "led.h"
 #include "izkit.h"
 
-using namespace IZKit; //include device setup stuff
+using namespace IzKit; //include device setup stuff
 
 String state = "Initial"; //current state
-Device dev(ID, state);
+Device dev(NODE_ID, NODE_IO);
 
 //runs once upon startup
 void setup()
@@ -24,25 +24,28 @@ void setup()
   InitLed();
 
   //setup device
-  //dev.ConnectWifi("NodeMCU", "passverd", 0);
-  //dev.AddInfo(Node_DESC, NODE_IO);
-  //dev.SetValue(state, 0);
+  dev.ConnectWifi("NodeMCU", "passverd", 0);
+  dev.addInfo(NODE_DESC);
 }
 
 //constantly repeats
 void loop()
 {
-  //respond based on state
-  if (state == "ON") ledOn();
-  if (state == "OFF" || state == "Initial") ledOff();
+  //check for new info
+  if (dev.CheckUpdate(0))
+  {
+    String newState;
+    newState = dev.getValue();
 
-  //pause
-  delay(10);
+    //make sure valid state
+    if (newState == "ON" || newState == "OFF")
+      state = newState;
 
-  delay(1000);
+    //respond based on state
+    if (state == "ON") ledOn();
+    if (state == "OFF" || state == "Initial") ledOff();
+  }
 
-  if (state == "OFF" || state == "Initial") state = "ON";
-  else if (state == "ON") state = "OFF";
-
+  delay(300);
   Serial.println(state);
 }

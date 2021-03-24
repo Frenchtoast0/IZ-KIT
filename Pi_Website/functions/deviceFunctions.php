@@ -106,10 +106,22 @@ function UploadProgram($wire)
 }
 
 //returns a list of the devices in the db
-
+//return - json list of device state table
 function GetDevices()
 {
+    $data = array();
 
+    //get connected devices
+    $query = "SELECT ID,Val,IO,Dsc,Admin FROM Stats WHERE not Val = 'Disconnected'";
+    if ($result = SQLi_Query($query))
+    {
+        while ($row = $result->fetch_assoc())
+        {
+            $data[] = $row;
+        }
+    }
+
+    return $data;
 }
 
 ?>

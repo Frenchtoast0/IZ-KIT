@@ -88,7 +88,7 @@ void Device::setValue(String val, int v=0)
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    //only do this if the device is a 
+    //only do this if the device is an input
     if(io)
     {
         //cleaing buffer 

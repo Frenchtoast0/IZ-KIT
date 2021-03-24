@@ -15,41 +15,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./js/program.js"></script>
+    <script src="./js/admin.js"></script>
     <script src="./js/ajax.js"></script>
     <title>IZ-Kit Program</title>
 </head>
 <body class="text-center text-white bg-dark">
     <main>
         <section class="space-top-little">
-            <h1>Admin Panel</h1>
+            <h1>Admin Panel <button class="btn btn-primary" id="refresh"><img height="32" width="32" src="./img/refresh.png"></button></h1>
+            <br/>
+            
 
-            <div id="DeviceCards" class="container">
-                <template>
-                    <div class="card text-dark" style="width: 300px;">
-                        <img class="card-img-top" src="">
-                        <div class="card-body">
-                            <h5 class="card-title">Device ID</h5>
-                            <p class="card-text">Device description</p>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <label for="curValue">Current Value:</label>
-                                    <input type="text" readonly="true" id="curValue">
-                                </li>
-                                <li class="list-group-item">
-                                    <label for="lock">Admin Lock</label>
-                                    <input type="checkbox" id="lock">
-                                </li>
-                                <li class="list-group-item">
-                                    <label for="newValue">New Value:</label>
-                                    <input type="text" id="newValue">
-                                    <button class="btn btn-primary" id="Enter">Enter</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </template>
-            </div>
+            <div class="container">
+                <table id="deviceTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td scope="col">Device ID</td>
+                            <td scope="col">Current State</td>
+                            <td scope="col">I/O</td>
+                            <td scope="col">Description</td>
+                            <td scope="col">Admin Lock</td>
+                            <td scope="col">Change State</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div> 
 
             <label id="status"></label>
             

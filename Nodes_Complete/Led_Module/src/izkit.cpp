@@ -1,19 +1,14 @@
-//**************************************************
-// File: izkit.cpp
-// Author: Ezekiel Enns
-// Description: Communications of IZ-Kit
-//**************************************************
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include "izkit.h"
+#include "IzKit.h"
 
-using namespace IZKit;
+using namespace IzKit;
 
 IPAddress Device::server(199,185,50,206);
 int Device::port = 10001;
 WiFiClient Device::client;
 
-void Device::ConnectWifi(const String ssid, String pass, int v = 0)
+void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
 {
     WiFi.begin(ssid,pass);
     while (WiFi.status() != WL_CONNECTED)
@@ -25,76 +20,87 @@ void Device::ConnectWifi(const String ssid, String pass, int v = 0)
 
 }
 
-void Device::ConnectClient(int v = 0)
+void Device::ConnectClient(int v=0)
 {
-    if(client.connect(server, port))
+    if(!client.connected())
     {
-        if(v) Serial.println("Connected to Server");
-    }
-    else
-    {
-        if(v) Serial.println("Error: could not connect to server");
-        Serial.println(server.toString());
-        Serial.println(port);
+        if(client.connect(server,port))
+        {
+            if(v)Serial.println("Connected to Server");
+        }
+        else
+        {
+            if(v)Serial.println("Error could not connect to server");
+            Serial.println(server.toString());
+            Serial.println(port);
+        }
     }
 }
 
-Device::Device(String id, String value)
+
+Device::Device(String id,int io)
 {
    this->id = id;
-   this->value = value;
+   this->io = io;
+   this->value = "inital";
 }
 
-void Device::AddInfo(String desc, int io)
+void Device::addInfo(String desc)
 {
    if(regist) return;
-    
-   ConnectClient(1);
-   Serial.println(id);
-   client.print(id);
-   client.println('|'+desc+'|'+io+'|'+value); 
-   while(!client.available());
-   regist = 1;
+   if(!client.connected())
+   {
+       ConnectClient(1);
+       Serial.println(id+" adding info");
+       client.print(id);
+       client.println('|'+desc+'|'+(String)io);
+       client.flush(); // needs to happen here
+       Serial.println("Has been added");
+       regist = 1;
+   }
 }
 
-void Device::GetUpdate(int v = 0)
+/*
+    returns true if updated else it 
+*/
+int Device::CheckUpdate(int v=0)
 {
     if(!regist)
     {
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-
-    if(!this->client.connected())
+    if(client.available())
     {
-        ConnectClient(v);
-        client.println(this->id+'|');
-        client.println(this->value);
+        this->value = client.readString();
+        client.print("1");
+        client.flush();
+        
+        return 1;
     }
-    while(!client.available());
-    this->value = client.readString();
+    return 0;
 }
 
-void Device::SetValue(String val, int v = 0)
+void Device::setValue(String val, int v=0)
 {
     if(!regist)
     {
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    Serial.println("Connecting to client");
-    ConnectClient(v);
-    client.println(id);
-    client.println('|'+val);
-    GetUpdate(0);
-    
-    Serial.println("Value was changed to");
-    Serial.println(value);
-    
-    
+    //only do this if the device is a 
+    if(io)
+    {
+        //cleaing buffer 
+        Serial.println("Sending Server value");
+        client.flush();
+        client.println(val);
+        value = val;
+        Serial.println("Data has been sent");
+    }
 }
 
-String Device::GetValue()
+String Device::getValue()
 {
     return value;
 }

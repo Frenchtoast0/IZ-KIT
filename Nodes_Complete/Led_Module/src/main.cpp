@@ -46,6 +46,6 @@ void loop()
     if (state == "OFF" || state == "Initial") ledOff();
   }
 
-  delay(300);
+  delay(1000);
   Serial.println(state);
 }

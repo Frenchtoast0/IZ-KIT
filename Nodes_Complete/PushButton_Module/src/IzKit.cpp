@@ -93,7 +93,7 @@ void Device::setValue(String val, int v=0)
     {
         //cleaing buffer 
         Serial.println("Sending Server value");
-        client.println(val);
+        if (val.length() > 0) client.println(val);
         value = val;
         Serial.println("Data has been sent");
     }

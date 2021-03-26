@@ -8,6 +8,7 @@ IPAddress Device::server(199,185,50,206);
 int Device::port = 10001;
 WiFiClient Device::client;
 
+
 void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
 {
     WiFi.begin(ssid,pass);
@@ -42,7 +43,7 @@ Device::Device(String id,int io)
 {
    this->id = id;
    this->io = io;
-   this->value = "inital";
+   this->value = "Initial";
 }
 
 void Device::addInfo(String desc)
@@ -70,7 +71,8 @@ int Device::CheckUpdate(int v=0)
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    if(client.available())
+
+    if(true)
     {
         this->value = client.readString();
         client.print("1");
@@ -88,13 +90,13 @@ void Device::setValue(String val, int v=0)
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    //only do this if the device is a 
+    //only do this if the device is an output
     if(io)
     {
         //cleaing buffer 
         Serial.println("Sending Server value");
         client.flush();
-        client.println(val);
+        if (val.length() > 0) client.println(val);
         value = val;
         Serial.println("Data has been sent");
     }
@@ -104,4 +106,3 @@ String Device::getValue()
 {
     return value;
 }
-

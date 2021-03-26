@@ -32,7 +32,7 @@ namespace IzKit
       int io;
 
     public:
-      //hadning function for connecting to a network take it or leave it 
+      //handing function for connecting to a network take it or leave it 
       static void ConnectWifi(const String ssid,const char* pass,int);
       
       //self explanatory

@@ -45,6 +45,34 @@ class MyAPI extends API {
       return GetDevices();
     } 
   }
+
+  //change admin lock state
+  protected function adminLock(){
+    $resp["method"] = $this->method;
+    $resp["request"] = $this->request;
+    $resp["putfile"] = $this->file;
+    $resp["verb"] = $this->verb;
+    $resp["args"] = $this->args;
+
+    if ($this->method == "POST")
+    {
+      return AdminLock($this->request);
+    } 
+  }
+
+  //change admin lock state
+  protected function adminStateChange(){
+    $resp["method"] = $this->method;
+    $resp["request"] = $this->request;
+    $resp["putfile"] = $this->file;
+    $resp["verb"] = $this->verb;
+    $resp["args"] = $this->args;
+
+    if ($this->method == "POST")
+    {
+      return ChangeState($this->request);
+    } 
+  }
 }
 
 // Executable API Call

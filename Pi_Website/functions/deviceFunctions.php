@@ -124,4 +124,55 @@ function GetDevices()
     return $data;
 }
 
+//Locks admin value in device stats table
+//returns - status
+function AdminLock($postData)
+{
+    $data = array();
+
+    $id = $postData["ID"];
+
+    //determine checked value
+    if ($postData["checked"] == "ON") $checked = 1;
+    else $checked = 0;
+
+    //update table
+    $query = "UPDATE Stats SET Admin = $checked WHERE ID = '$id'";
+    
+    if (SQLi_NonQuery($query))
+    {
+        $data["status"] = "Updated admin lock to " . $postData["checked"] . " on " . $postData["ID"];
+    }
+    else
+    {
+        $data["status"] = "Error: admin lock change failed!";
+    }
+    
+    return $data;
+}
+
+//Changes device state
+//returns - status
+function ChangeState($postData)
+{
+    $data = array();
+
+    $id = $postData["ID"];
+    $val = $postData["value"];
+
+    //update table
+    $query = "UPDATE Stats SET Val='$val' WHERE ID='$id'";
+    
+    if (SQLi_NonQuery($query))
+    {
+        $data["status"] = "Changed state of " . $postData["ID"] . " to " . $postData["value"];
+    }
+    else
+    {
+        $data["status"] = "Error: state change failed!";
+    }
+    
+    return $data;
+}
+
 ?>

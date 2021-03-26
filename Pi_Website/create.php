@@ -40,7 +40,7 @@
     ?>
     <main class="space-top">
         <section id="MainBox">
-            <h1>Create an account</h1>
+            <h1>Create an Account</h1>
             <form class="mx-auto" method="POST" action="./create.php">
                 <input class="form-control" type="text" name="username" placeholder="Username" required>
                 <input class="form-control up-a-bit" type="password" name="password" placeholder="Password" required>

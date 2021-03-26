@@ -22,10 +22,9 @@
         <section id="MainBox" class="space-top-little">
             <h1>Index Page</h1>
 
-            <a href="./program.php">Program Page</a>
+            <h4><a href="./program.php">Program Page</a></h4>
+            <h4><a href="./admin.php">Admin Panel</a></h4>
             <br>
-            <a href="./admin.php">Admin Panel</a>
-            <label id="status"></label>
             
             <form method="POST" action="./login.php">
                 <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Logout">Logout</button>

@@ -44,6 +44,7 @@
             </div> 
 
             <label id="status"></label>
+            <br>
             
             <a href="./index.php">Back</a>
 

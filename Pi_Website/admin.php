@@ -43,13 +43,44 @@
                 </table>
             </div> 
 
+            <!--modal trigger -->
+            <button class="btn btn-danger" id="eraseButton" data-toggle="modal" data-target="#confirmDelete">
+                Clear Programs
+            </button>
+            <br>
+
             <label id="status"></label>
             <br>
             
             <a href="./index.php">Back</a>
 
             <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+
+            <!-- modal dialogue modified from Bootstrap documentation-->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content text-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Are you sure you want to delete?</h5>
+                        <button type="button" class="close btn" data-dismiss="modal">
+                        <span class="text-lg"><h3>&times;</h3></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This action cannot be reversed, it will delete all the circuit programs from the database.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">Confirm Delete</button>
+                    </div>
+                </div>
+            </div>
+            </div>
         </section>
     </main>
 </body>
+
+<!-- Bootstrap scripts: Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

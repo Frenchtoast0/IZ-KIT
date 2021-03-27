@@ -175,4 +175,16 @@ function ChangeState($postData)
     return $data;
 }
 
+//Deletes all programs in db
+//returns - status of delete
+function AdminDelete()
+{
+    $data = array();
+
+    //$query = 
+
+    $data["status"] = "Successfully cleared all programs!";
+    return $data;
+}
+
 ?>

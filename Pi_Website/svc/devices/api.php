@@ -73,6 +73,20 @@ class MyAPI extends API {
       return ChangeState($this->request);
     } 
   }
+
+  //clear all programs in db
+  protected function adminDelete(){
+    $resp["method"] = $this->method;
+    $resp["request"] = $this->request;
+    $resp["putfile"] = $this->file;
+    $resp["verb"] = $this->verb;
+    $resp["args"] = $this->args;
+
+    if ($this->method == "DELETE")
+    {
+      return AdminDelete();
+    } 
+  }
 }
 
 // Executable API Call

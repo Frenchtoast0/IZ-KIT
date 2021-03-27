@@ -7,12 +7,23 @@ $(document).ready(() =>
     $("#refresh").click(function(){
         LoadDevices();
     })
+
+    $("#deleteButton").click(function()
+    {
+        ClearPrograms();
+    });
 });
 
 //tell server to return devices
 function LoadDevices()
 {
     AjaxRequest("./svc/devices/adminLoad", "GET", {}, "json", DisplayDevices, ErrorHandler);
+}
+
+//delete all programs in db
+function ClearPrograms()
+{
+    AjaxRequest("./svc/devices/adminDelete", "DELETE", {}, "json", DisplayStatus, ErrorHandler);
 }
 
 //generic error handler

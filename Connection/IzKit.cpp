@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include "IzKit.h"
+#include "izkit.h"
 
 using namespace IzKit;
 
 IPAddress Device::server(199,185,50,206);
 int Device::port = 10001;
 WiFiClient Device::client;
+
 
 void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
 {
@@ -42,7 +43,7 @@ Device::Device(String id,int io)
 {
    this->id = id;
    this->io = io;
-   this->value = "inital";
+   this->value = "Initial";
 }
 
 void Device::addInfo(String desc)
@@ -51,10 +52,7 @@ void Device::addInfo(String desc)
    if(!client.connected())
    {
        ConnectClient(1);
-       Serial.println(id+" adding info");
-       client.print(id);
-       client.println('|'+desc+'|'+(String)io);
-       client.flush(); // needs to happen here
+       client.print((String)id+'|'+desc+'|'+(String)io+'\r');
        Serial.println("Has been added");
        regist = 1;
    }
@@ -65,20 +63,19 @@ void Device::addInfo(String desc)
 */
 int Device::CheckUpdate(int v=0)
 {
-    Serial.println("What the hell");
     if(!regist)
     {
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    if(client.available())
+    while (!client.available());
+    this->value = "";
+    while(client.available())
     {
-        this->value = client.readString();
-        client.print("1");
-        client.flush();
-        return 1;
+        this->value += (char)client.read();
     }
-    return 0;
+    if(v)Serial.println(this->value);
+    return 1; 
 }
 
 void Device::setValue(String val, int v=0)
@@ -88,12 +85,12 @@ void Device::setValue(String val, int v=0)
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
     }
-    //only do this if the device is a 
+    //only do this if the device is an output
     if(io)
     {
         //cleaing buffer 
-        Serial.println("Sending Server value");
-        client.println(val);
+        if(v)Serial.println("Sending Server value");
+        if (val.length() > 0) client.println(val);
         value = val;
         Serial.println("Data has been sent");
     }
@@ -103,4 +100,3 @@ String Device::getValue()
 {
     return value;
 }
-

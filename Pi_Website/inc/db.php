@@ -70,6 +70,31 @@ function SQLi_NonQuery($query)
     return $mysqli->affected_rows;
 }
 
+//queries db, returns TRUE/FALSE rather than results
+//allows for multiple lines in one query
+function SQLi_MultiQuery($query)
+{
+    global $mysqli, $mysqli_status;
+
+    //db not connected
+    if ($mysqli == null)
+    {
+        $mysqli_status = "No mysqli connection!";
+        return false;
+    }
+
+    //execution failed
+    if (!($result = $mysqli->multi_query($query)))
+    {
+        $mysqli_status = "mySqliQuery:Error ({$mysqli->errno}) {$mysqli->error}";
+        return false;
+    }
+
+    $mysqli_status = "SQL query successful! {$mysqli->affected_rows} rows affected.";
+
+    return true;
+}
+
 //returns the last inputted ID
 function SQLi_InsertID()
 {

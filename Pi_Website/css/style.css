@@ -42,10 +42,14 @@ h1{
 }
 
 #code{
-    height: 75vh;
+    height: 65vh;
     width: 30vw;
     margin-left: auto;
     margin-right: auto;
+}
+
+a{
+    text-decoration: none;
 }
 
 #deviceTable{

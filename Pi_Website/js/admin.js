@@ -23,7 +23,7 @@ function LoadDevices()
 //delete all programs in db
 function ClearPrograms()
 {
-    AjaxRequest("./svc/devices/adminDelete", "DELETE", {}, "json", DisplayStatus, ErrorHandler);
+    AjaxRequest("./svc/devices/deleteCircuits", "DELETE", {}, "json", DisplayStatus, ErrorHandler);
 }
 
 //generic error handler

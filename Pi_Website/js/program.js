@@ -6,7 +6,116 @@ $(document).ready(() =>
         UploadCode();
     });
 
+    //allow special code help
+    $("#code").keydown(function(e)
+    {
+        CodeHelp(this, e);
+    });
+
 });
+
+//makes coding easier
+//allows tabbing, easy creation of semicolons, etc.
+function CodeHelp(textarea, e)
+{
+    //tab was pressed
+    if (e.keyCode == 9)
+    {
+        //get caret position (and any selection)
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+
+        //get textarea properties
+        let t = $(textarea);
+        let v = t.val();
+
+        //value = text before select + tab + text after select
+        t.val(
+            v.substring(0, start) 
+            + "\t"
+            + v.substring(end)
+        );
+
+        //move caret to correct position
+        textarea.selectionStart = textarea.selectionEnd = start + 1;
+
+        //prevent focus from changing
+        e.preventDefault();
+    }
+    //open semicolon was pressed
+    else if (e.keyCode == 219 && e.shiftKey && textarea.selectionStart == textarea.selectionEnd) 
+    {
+        //get caret position (and any selection)
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+
+        //get textarea properties
+        let t = $(textarea);
+        let v = t.val();
+
+        //value = text before select + } + text after select
+        t.val(
+            v.substring(0, start) 
+            + "{\r\t\r}"
+            + v.substring(end)
+        );
+
+        //move caret to correct position
+        textarea.selectionStart = textarea.selectionEnd = start + 3;
+
+        //prevent duplicate opening semicolons
+        e.preventDefault();
+    }
+    //quotes were added
+    else if (e.keyCode == 222 && e.shiftKey && textarea.selectionStart == textarea.selectionEnd) 
+    {
+        //get caret position (and any selection)
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+
+        //get textarea properties
+        let t = $(textarea);
+        let v = t.val();
+
+        //value = text before select + } + text after select
+        t.val(
+            v.substring(0, start) 
+            + "\"\""
+            + v.substring(end)
+        );
+
+        //move caret to correct position
+        textarea.selectionStart = textarea.selectionEnd = start + 1;
+
+        //prevent duplicate opening semicolons
+        e.preventDefault();
+    }
+    //enter pressed and last char is colon or comma
+    else if (e.keyCode == 13 && ($(textarea).val()[textarea.selectionStart-1] == ":" || $(textarea).val()[textarea.selectionStart-1] == ",")&& textarea.selectionStart == textarea.selectionEnd) 
+    {
+        //get caret position (and any selection)
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+
+        //get textarea properties
+        let t = $(textarea);
+        let v = t.val();
+
+        //value = text before select + } + text after select
+        t.val(
+            v.substring(0, start) 
+            + "\r\t\t"
+            + v.substring(end)
+        );
+
+        //move caret to correct position
+        textarea.selectionStart = textarea.selectionEnd = start + 3;
+
+        //prevent duplicate opening semicolons
+        e.preventDefault();
+    }
+    //else alert(e.keyCode);
+}
 
 //ajax status response handler
 function HandleStatus(ajaxData, ajaxStatus)

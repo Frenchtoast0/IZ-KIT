@@ -75,7 +75,7 @@ class MyAPI extends API {
   }
 
   //clear all programs in db
-  protected function adminDelete(){
+  protected function deleteCircuits(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
@@ -84,7 +84,7 @@ class MyAPI extends API {
 
     if ($this->method == "DELETE")
     {
-      return AdminDelete();
+      return DeleteCircuits();
     } 
   }
 }

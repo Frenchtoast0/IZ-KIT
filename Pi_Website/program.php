@@ -25,7 +25,7 @@
             <h1>Program the IZ-Kit Controller</h1>
             
             <form>
-                <textarea id="code" class="form-control"></textarea>
+                <textarea id="code" class="form-control" autofocus="true"></textarea>
                 <button type="button" id="uploadButton" class="btn btn-md btn-success mt-1">Upload</button>
             </form>
 

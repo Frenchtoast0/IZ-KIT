@@ -101,7 +101,7 @@ function UploadProgram($wire)
 
     //package and send function values
     $response["data"] = $data;
-    $response["status"] = true;
+
     return $response;
 }
 
@@ -177,13 +177,19 @@ function ChangeState($postData)
 
 //Deletes all programs in db
 //returns - status of delete
-function AdminDelete()
+function DeleteCircuits()
 {
+    global $mysqli_status;
+
     $data = array();
 
-    //$query = 
+    //clear program tables
+    $query = "DELETE FROM Circuits; DELETE FROM Input; DELETE FROM Output; DELETE FROM CircuitToInput; DELETE FROM CircuitToOutput";
+    if (SQLi_MultiQuery($query))
+        $data["status"] = "Successfully cleared all programs!";
+    else
+        $data["status"] = $mysqli_status;
 
-    $data["status"] = "Successfully cleared all programs!";
     return $data;
 }
 

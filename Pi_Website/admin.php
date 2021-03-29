@@ -74,8 +74,6 @@
                         <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">Confirm Delete</button>
                     </div>
                 </div>
-            </div>
-            </div>
         </section>
     </main>
 </body>

@@ -114,6 +114,32 @@ function CodeHelp(textarea, e)
         //prevent duplicate opening semicolons
         e.preventDefault();
     }
+    //enter pressed and last 2 chars are ## -> special function, creates code outline
+    else if (e.keyCode == 13 && ($(textarea).val()[textarea.selectionStart-1] == "#" && $(textarea).val()[textarea.selectionStart-2] == "#")&& textarea.selectionStart == textarea.selectionEnd) 
+    {
+        //get caret position (and any selection)
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+
+        //get textarea properties
+        let t = $(textarea);
+        let v = t.val();
+
+        //value = text before select + } + text after select
+        t.val(
+            v.substring(0, start-2) 
+            + "{\r"
+            + "\tmeta:\r\t\tname=\"\"\r\tinputs:\r\toutputs:"
+            + "\r}"
+            + v.substring(end)
+        );
+
+        //move caret to correct position
+        textarea.selectionStart = textarea.selectionEnd = start + 15;
+
+        //prevent enter from actually firing
+        e.preventDefault();
+    }
     //else alert(e.keyCode);
 }
 

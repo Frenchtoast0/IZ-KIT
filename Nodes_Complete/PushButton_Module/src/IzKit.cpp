@@ -30,7 +30,7 @@ void Device::ConnectClient(int v=0)
         }
         else
         {
-            if(v)Serial.println("Error could not connect to server");
+            if(v)Serial.println("Error: could not connect to server");
             Serial.println(server.toString());
             Serial.println(port);
         }
@@ -42,7 +42,7 @@ Device::Device(String id,int io)
 {
    this->id = id;
    this->io = io;
-   this->value = "inital";
+   this->value = "Initial";
 }
 
 void Device::addInfo(String desc)
@@ -51,10 +51,7 @@ void Device::addInfo(String desc)
    if(!client.connected())
    {
        ConnectClient(1);
-       Serial.println(id+" adding info");
-       client.print(id);
-       client.println('|'+desc+'|'+(String)io);
-       client.flush(); // needs to happen here
+       client.print((String)id+'|'+desc+'|'+(String)io+'\r');
        Serial.println("Has been added");
        regist = 1;
    }
@@ -65,20 +62,20 @@ void Device::addInfo(String desc)
 */
 int Device::CheckUpdate(int v=0)
 {
-    Serial.println("What the hell");
     if(!regist)
     {
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
+        return 0;
     }
-    if(client.available())
+    while (!client.available());
+    this->value = "";
+    while(client.available())
     {
-        this->value = client.readString();
-        client.print("1");
-        client.flush();
-        return 1;
+        this->value += (char)client.read();
     }
-    return 0;
+    if(v)Serial.println(this->value);
+    return 1; 
 }
 
 void Device::setValue(String val, int v=0)
@@ -87,15 +84,17 @@ void Device::setValue(String val, int v=0)
     {
         Serial.println("ERROR DEV HAS NO INFO IN DB");
         Serial.println("\tPlease run Device.addInfo()");
+        return;
     }
-    //only do this if the device is an input
+    //only do this if the device is an output
     if(io)
     {
         //cleaing buffer 
-        Serial.println("Sending Server value");
+        if(v)Serial.println("Sending Server value");
         if (val.length() > 0) client.println(val);
         value = val;
-        Serial.println("Data has been sent");
+        if (v)
+            Serial.println("Data has been sent");
     }
 }
 
@@ -103,4 +102,3 @@ String Device::getValue()
 {
     return value;
 }
-

@@ -25,7 +25,7 @@ void setup()
   InitPushButton();
 
   //setup device
-  dev.ConnectWifi("NodeMCU", "passverd", 0);
+  dev.ConnectWifi(WIFI_SSID, WIFI_PASS, 0);
   dev.addInfo(NODE_DESC);
   dev.setValue(state, 0);
 }

@@ -7,7 +7,7 @@
 #include <Arduino.h>
 #include "lightSensor.h"
 
-int light_sens = 3; //how much the light value has to differ from the 
+int light_sens = 5; //how much the light value has to differ from the 
                      //last state to be counted as a new value
 
 //returns the light value as 

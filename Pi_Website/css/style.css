@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 /*font-family: 'Russo One', 'Arial', sans-serif;*/
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+/*font-family: 'Roboto Mono', monospace;*/
+
 html, body{
     height: 100%;
 }
@@ -46,6 +49,7 @@ h1{
     width: 30vw;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Roboto Mono', monospace;
 }
 
 a{

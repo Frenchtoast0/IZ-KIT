@@ -8,7 +8,7 @@
 #include "config.h"
 #include "gpio.h"
 #include "led.h"
-#include "izkit.h"
+#include "IzKit.h"
 
 using namespace IzKit; //include device setup stuff
 
@@ -24,7 +24,7 @@ void setup()
   InitLed();
 
   //setup device
-  dev.ConnectWifi("NodeMCU", "passverd", 0);
+  dev.ConnectWifi(WIFI_SSID, WIFI_PASS, 0);
   dev.addInfo(NODE_DESC);
 }
 
@@ -46,6 +46,6 @@ void loop()
     if (state == "OFF" || state == "Initial") ledOff();
   }
 
-  delay(1000);
+  delay(10);
   Serial.println(state);
 }

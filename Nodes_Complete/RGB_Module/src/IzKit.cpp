@@ -17,7 +17,6 @@ void Device::ConnectWifi(const String ssid,const char* pass,int v = 0)
         if(v) Serial.print(WiFi.status());
     }
     if(v) Serial.println("Connected to wifi");
-
 }
 
 void Device::ConnectClient(int v=0)

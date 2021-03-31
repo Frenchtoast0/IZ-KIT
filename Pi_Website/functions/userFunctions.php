@@ -6,6 +6,9 @@
 //************************************************
 include_once "./inc/db.php";
 
+//enable access to the session
+session_start();
+
 //adds a new user to the db
 //$params - values to make user with
 //*NOTE: "error" or "success", no true/false
@@ -86,8 +89,6 @@ function CreateUser($params)
 //$params - user credentials
 function ValidateUser($params)
 {
-    session_start();
-
     $query = "SELECT ID, Username, password FROM Users WHERE Username = '{$params["username"]}'";
 
     $result = null; //login query result
@@ -141,5 +142,64 @@ function ValidateUser($params)
     return $params;
 }
 
+//Saves sent text contents to file in user's directory
+//returns - success/fail
+function SaveProgram($json)
+{
+    $data = array(); //json response
+    
+    $path = "/home/izkit/Programs/". $_SESSION["userID"];
+    $filename =  $path . "/code.txt";
+
+    //make sure directory exists
+    if (!is_dir($path)) mkdir($path, 0755);
+
+    //save file
+    if ($file = fopen($filename, "w"))
+    {
+        fwrite($file, $json["code"]);
+        $data["status"] = "Successfully saved program";
+        fclose($file);
+    }
+    else
+    {
+        $data["status"] = "Save failed";
+    }
+        
+    return $data;
+}
+
+//Loads text contents from file in user's directory
+//returns - text contents
+function LoadProgram()
+{
+    $data = array(); //json response
+
+    $filename = "/home/izkit/Programs/" . $_SESSION["userID"] . "/code.txt";
+
+    //check if file exists
+    if (!file_exists($filename))
+    {
+        $data["status"] = "No saved program exists";
+        $data["code"] = "";
+    }
+    else
+    {
+        //open file
+        if ($file = fopen($filename, "rb"))
+        {
+            $data["code"] = fread($file, filesize($filename));
+            fclose($file);
+            $data["status"] = "Successfully loaded program";
+        }
+        else
+        {
+            $data["status"] = "Load failed";
+            $data["code"] = "";
+        }
+    }
+
+    return $data;
+}
 
 ?>

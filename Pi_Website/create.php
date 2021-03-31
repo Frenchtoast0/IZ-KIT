@@ -38,26 +38,21 @@
         elseif ($responseParams["status"] == "success")
             echo "<div class=\"alert alert-success\"><strong>Success: </strong>" . $responseParams["response"] . "</div>";
     ?>
-    <main class="space-top">
-        <section id="MainBox">
-            <h1>Create an Account</h1>
-            <form class="mx-auto" method="POST" action="./create.php">
-                <input class="form-control" type="text" name="username" placeholder="Username" required>
-                <input class="form-control up-a-bit" type="password" name="password" placeholder="Password" required>
-                <input class="form-control up-a-bit" type="password" name="password2" placeholder="Retype password" required>
-                <div>
-                    <input class="form-control up-a-bit" type="text" name="serial" placeholder="Serial number" required>
-                    <span class="form-text">The serial number is found in your IZ KIT.</span>
-                </div>
-                <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Create">Create</button>
-            </form>
-
-            <div id="status">
+    <section class="space-top container">
+        <h1>Create an Account</h1>
+        <form class="mx-auto" method="POST" action="./create.php">
+            <input class="form-control" type="text" name="username" placeholder="Username" required>
+            <input class="form-control up-a-bit" type="password" name="password" placeholder="Password" required>
+            <input class="form-control up-a-bit" type="password" name="password2" placeholder="Retype password" required>
+            <div>
+                <input class="form-control up-a-bit" type="text" name="serial" placeholder="Serial number" required>
+                <span class="form-text">The serial number is found in your IZ KIT.</span>
             </div>
+            <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Create">Create</button>
+        </form>
 
-            <a href="./index.php">Back</a>
-            <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
-        </section>
-    </main>
+        <a href="./index.php">Back</a>
+        <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+    </section>
 </body>
 </html>

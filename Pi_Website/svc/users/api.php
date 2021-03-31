@@ -1,6 +1,6 @@
 <?php
 require_once "../rest.api.php";  // include our base abstract class
-require_once "../../functions/deviceFunctions.php"; //connect to device functionality
+require_once "../../functions/userFunctions.php"; //connect to user functionality
 
 session_start(); //allow reading of session variable
 
@@ -18,7 +18,7 @@ class MyAPI extends API {
   }
 
   //programming device endpoint
-  protected function program(){
+  protected function saveProgram(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
@@ -28,12 +28,12 @@ class MyAPI extends API {
     if ($this->method == "POST")
     {
       $json = $this->request; //file_get_contents("php://input");
-      return UploadProgram($json);
+      return SaveProgram($json);
     } 
   }
 
-  //send admin command endpoint
-  protected function adminLoad(){
+  //change admin lock state
+  protected function loadProgram(){
     $resp["method"] = $this->method;
     $resp["request"] = $this->request;
     $resp["putfile"] = $this->file;
@@ -42,49 +42,7 @@ class MyAPI extends API {
 
     if ($this->method == "GET")
     {
-      return GetDevices();
-    } 
-  }
-
-  //change admin lock state
-  protected function adminLock(){
-    $resp["method"] = $this->method;
-    $resp["request"] = $this->request;
-    $resp["putfile"] = $this->file;
-    $resp["verb"] = $this->verb;
-    $resp["args"] = $this->args;
-
-    if ($this->method == "POST")
-    {
-      return AdminLock($this->request);
-    } 
-  }
-
-  //change admin lock state
-  protected function adminStateChange(){
-    $resp["method"] = $this->method;
-    $resp["request"] = $this->request;
-    $resp["putfile"] = $this->file;
-    $resp["verb"] = $this->verb;
-    $resp["args"] = $this->args;
-
-    if ($this->method == "POST")
-    {
-      return ChangeState($this->request);
-    } 
-  }
-
-  //clear all programs in db
-  protected function deleteCircuits(){
-    $resp["method"] = $this->method;
-    $resp["request"] = $this->request;
-    $resp["putfile"] = $this->file;
-    $resp["verb"] = $this->verb;
-    $resp["args"] = $this->args;
-
-    if ($this->method == "DELETE")
-    {
-      return DeleteCircuits();
+      return LoadProgram();  
     } 
   }
 }

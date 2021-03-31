@@ -5,6 +5,7 @@ $(document).ready(() =>
 
     //setup refresh button
     $("#refresh").click(function(){
+        $("#status").html("");
         LoadDevices();
     })
 

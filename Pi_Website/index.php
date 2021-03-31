@@ -18,20 +18,19 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="text-center text-white bg-dark">
-    <main>
-        <section id="MainBox" class="space-top-little">
-            <h1>Index Page</h1>
+    <section class="space-top-little">
+        <h1>Index Page</h1>
 
-            <h4><a href="./program.php">Program Page</a></h4>
-            <h4><a href="./admin.php">Admin Panel</a></h4>
-            <br>
-            
-            <form method="POST" action="./login.php">
-                <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Logout">Logout</button>
-            </form>
-            <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
-        </section>
-    </main>
+        <h4><a href="./program.php">Program Page</a></h4>
+        <h4><a href="./admin.php">Admin Panel</a></h4>
+        <h4><a href="./server.php">Server Monitor</a></h4>
+        <h4><a href="./account.php">Accounts</a></h4>
+        
+        <form method="POST" action="./login.php">
+            <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Logout">Logout</button>
+        </form>
+        <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+    </section>
 </body>
 
 </html>

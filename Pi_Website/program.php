@@ -20,21 +20,20 @@
     <title>IZ-Kit Program</title>
 </head>
 <body class="text-center text-white bg-dark">
-    <main>
-        <section id="MainBox" class="space-top-little">
-            <h1>Program the IZ-Kit Controller</h1>
-            
-            <form>
-                <textarea id="code" class="form-control" autofocus="true"></textarea>
-                <button type="button" id="uploadButton" class="btn btn-md btn-success mt-1">Upload</button>
-            </form>
+    <section class="space-top-little container">
+        <h1>Program the IZ-Kit Controller</h1>
+        
+        <button type="button" id="saveButton" class="btn btn-md btn-primary">Save Program</button>
+        <button type="button" id="loadButton" class="btn btn-md btn-warning">Load Program</button>
+        <textarea id="code" class="form-control no-focus-border mt-1 mx-auto" autofocus="true"></textarea>
+        <button type="button" id="uploadButton" class="btn btn-lg btn-success mt-1">Upload</button>
+        
+        <br>
+        <label id="status" class="mt-1"></label>
+        <br>
+        <a href="./index.php">Back</a>
 
-            <label id="status"></label>
-
-            <a href="./index.php">Back</a>
-
-            <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
-        </section>
-    </main>
+        <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+    </section>
 </body>
 </html>

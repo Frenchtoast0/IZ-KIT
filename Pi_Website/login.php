@@ -53,18 +53,16 @@
         if ($responseParams["status"] == false)
             echo "<div class=\"alert alert-danger\"><strong>Error: </strong>" . $responseParams["response"] . "</div>";
     ?>
-    <main class="space-top">
-        <section id="MainBox">
-            <h1>Welcome to the IZ-Kit Management Interface</h1>
-            <h5 class="fw-normal">Please login or <a href="./create.php">create an account</a>:</h5>
-            <form class="mx-auto" method="POST" action="login.php">
-                <input class="form-control" type="text" name="username" placeholder="Username" required>
-                <input class="form-control up-a-bit" type="password" name="password" placeholder="Password" required>
-                <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Login">Login</button>
-            </form>  
-            </div>
-            <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
-        </section>
-    </main>
+    <section id="" class="space-top container-sm">
+        <h1>Welcome to the IZ-Kit Management Interface</h1>
+        <h5 class="fw-normal">Please login or <a href="./create.php">create an account</a>:</h5>
+        <form class="mx-auto" method="POST" action="login.php">
+            <input class="form-control" type="text" name="username" placeholder="Username" required>
+            <input class="form-control up-a-bit" type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Login">Login</button>
+        </form>  
+        </div>
+        <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+    </section>
 </body>
 </html>

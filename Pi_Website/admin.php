@@ -20,62 +20,58 @@
     <title>IZ-Kit Program</title>
 </head>
 <body class="text-center text-white bg-dark">
-    <main>
-        <section class="space-top-little">
-            <h1>Admin Panel <button class="btn btn-primary" id="refresh"><img height="32" width="32" src="./img/refresh.png"></button></h1>
-            <br/>
-            
+    <section class="space-top-little">
+        <h1>Admin Panel <button class="btn btn-primary" id="refresh"><img height="32" width="32" src="./img/refresh.png"></button></h1>
 
-            <div class="container">
-                <table id="deviceTable" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td scope="col">Device ID</td>
-                            <td scope="col">Current State</td>
-                            <td scope="col">I/O</td>
-                            <td scope="col">Description</td>
-                            <td scope="col">Admin Lock</td>
-                            <td scope="col">Change State</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div> 
+        <div class="container">
+            <table id="deviceTable" class="table-responsive mx-auto">
+                <thead>
+                    <tr>
+                        <td scope="col">Device ID</td>
+                        <td scope="col">Current State</td>
+                        <td scope="col">I/O</td>
+                        <td scope="col">Description</td>
+                        <td scope="col">Admin Lock</td>
+                        <td scope="col">Change State</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div> 
 
-            <!--modal trigger -->
-            <button class="btn btn-danger" id="eraseButton" data-toggle="modal" data-target="#confirmDelete">
-                Clear Programs
-            </button>
-            <br>
+        <!--modal trigger -->
+        <button class="btn btn-danger mt-1" id="eraseButton" data-toggle="modal" data-target="#confirmDelete">
+            Clear Programs
+        </button>
 
-            <label id="status"></label>
-            <br>
-            
-            <a href="./index.php">Back</a>
+        <br>
+        <label id="status" class="mt-1"></label>
+        
+        <br>
+        <a href="./index.php">Back</a>
 
-            <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
+        <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
 
-            <!-- modal dialogue modified from Bootstrap documentation-->
-            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content text-dark">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Are you sure you want to delete?</h5>
-                        <button type="button" class="close btn" data-dismiss="modal">
-                        <span class="text-lg"><h3>&times;</h3></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>This action cannot be reversed, it will delete all the circuit programs from the database.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">Confirm Delete</button>
-                    </div>
+        <!-- modal dialogue modified from Bootstrap documentation-->
+        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to delete?</h5>
+                    <button type="button" class="close btn" data-dismiss="modal">
+                    <span class="text-lg"><h3>&times;</h3></span>
+                    </button>
                 </div>
-        </section>
-    </main>
+                <div class="modal-body">
+                    <p>This action cannot be reversed, it will delete all the circuit programs from the database.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">Confirm Delete</button>
+                </div>
+            </div>
+    </section>
 </body>
 
 <!-- Bootstrap scripts: Popper.js, then Bootstrap JS -->

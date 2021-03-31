@@ -12,7 +12,40 @@ $(document).ready(() =>
         CodeHelp(this, e);
     });
 
+    //enable saving and uploading code files
+    $("#saveButton").click(function()
+    {
+        SaveFile($("#code").val());
+    });
+    $("#loadButton").click(function()
+    {
+        LoadFile();
+    });
+
 });
+
+//saves code file to user's folder
+function SaveFile(code)
+{
+    let sendData = {};
+    sendData["code"] = code;
+
+    //tell server to save
+    AjaxRequest("./svc/users/saveProgram", "POST", sendData, "json", HandleStatus, ErrorHandler);
+}
+
+//load's user's previously saved file
+function LoadFile()
+{
+    AjaxRequest("./svc/users/loadProgram", "GET", {}, "json", AddCode, ErrorHandler);
+}
+
+//changes code in code box
+function AddCode(ajaxData, ajaxStatus)
+{
+    if (ajaxData["code"] != "") $("#code").val(ajaxData["code"]);
+    $("#status").html(ajaxData["status"]);
+}
 
 //makes coding easier
 //allows tabbing, easy creation of semicolons, etc.
@@ -32,12 +65,12 @@ function CodeHelp(textarea, e)
         //value = text before select + tab + text after select
         t.val(
             v.substring(0, start) 
-            + "\t"
+            + "    "
             + v.substring(end)
         );
 
         //move caret to correct position
-        textarea.selectionStart = textarea.selectionEnd = start + 1;
+        textarea.selectionStart = textarea.selectionEnd = start + 4;
 
         //prevent focus from changing
         e.preventDefault();
@@ -56,12 +89,12 @@ function CodeHelp(textarea, e)
         //value = text before select + } + text after select
         t.val(
             v.substring(0, start) 
-            + "{\r\t\r}"
+            + "{\r    \r}"
             + v.substring(end)
         );
 
         //move caret to correct position
-        textarea.selectionStart = textarea.selectionEnd = start + 3;
+        textarea.selectionStart = textarea.selectionEnd = start + 6;
 
         //prevent duplicate opening semicolons
         e.preventDefault();
@@ -104,12 +137,12 @@ function CodeHelp(textarea, e)
         //value = text before select + } + text after select
         t.val(
             v.substring(0, start) 
-            + "\r\t\t"
+            + "\r        "
             + v.substring(end)
         );
 
         //move caret to correct position
-        textarea.selectionStart = textarea.selectionEnd = start + 3;
+        textarea.selectionStart = textarea.selectionEnd = start + 9;
 
         //prevent duplicate opening semicolons
         e.preventDefault();
@@ -129,13 +162,13 @@ function CodeHelp(textarea, e)
         t.val(
             v.substring(0, start-2) 
             + "{\r"
-            + "\tmeta:\r\t\tname=\"\"\r\tinputs:\r\toutputs:"
+            + "    meta:\r        name=\"\"\r    inputs:\r    outputs:"
             + "\r}"
             + v.substring(end)
         );
 
         //move caret to correct position
-        textarea.selectionStart = textarea.selectionEnd = start + 15;
+        textarea.selectionStart = textarea.selectionEnd = start + 24;
 
         //prevent enter from actually firing
         e.preventDefault();
@@ -146,7 +179,7 @@ function CodeHelp(textarea, e)
 //ajax status response handler
 function HandleStatus(ajaxData, ajaxStatus)
 {
-    $("#status").html(`${ajaxData["data"]}`);
+    $("#status").html(`${ajaxData["status"]}`);
 }
 
 //generic error handler
@@ -161,51 +194,75 @@ function ErrorHandler(requestor, textStatus, errorThrown)
 //parses and uploads code file
 function UploadCode()
 {
-    let data = {}; //data to ajax to server
-
     let code = $("#code").val();
 
+    //check if a wire was added
+    if (code.length < 1)
+    {
+        $("#status").html("Error: empty code file");
+        return;
+    }
+
     //remove whitespace
-    code = code.replace(/[\n \t\r]/mg, "");
+    code = code.replace(/[\n \t\r]/gm, "");
 
-    /*
-    Note, will need to account for multiple wires
-    */
+    //split code into multiple wires
+    wires = code.match(/{[^}]*}/gm);
 
-    //get circuit name
-    data["Name"] = code.match(/(?<=name=")[a-z0-9]*/gmi)[0];
-
-    //get inputs/outputs
-    let inputList = code.match(/(?<=inputs:)[a-z*\-0-9="<>,]*(?=outputs)/gmi);
-    let outputList = code.match(/(?<=outputs:)[a-z*\-0-9="<>,]*(?=})/gmi);
-
-    //break apart input strings
-    data["Inputs"] = [];
-    let inputs = inputList[0].split(",");
-    for (let i = 0; i < inputs.length; i++)
+    //check if a wire was added
+    if (wires == null || wires.length < 1)
     {
-        let it = {};
-        it["ID"] = inputs[i].match(/[a-z\-0-9]*(?=[<=>][<=>])/gmi)[0];
-        it["Sign"] = inputs[i].match(/[=><]=/gmi)[0];
-
-        it["Value"] = inputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
-
-        data["Inputs"].push(it);
-    }
-    
-
-    //break apart output strings
-    data["Outputs"] = [];
-    let outputs = outputList[0].split(",");
-    for (let i = 0; i < outputs.length; i++)
-    {
-        let o = {};
-        o["ID"] = outputs[i].match(/[a-z\-0-9]*(?==)/gmi)[0];
-        o["Value"] = outputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
-
-        data["Outputs"].push(o);
+        $("#status").html("Error: no circuits in code");
+        return;
     }
 
-    //send code away
-    AjaxRequest("./svc/devices/program", "POST", data, "json", HandleStatus, ErrorHandler);
+    //loop through wires
+    for (let i = 0; i < wires.length; i++)
+    {
+        let data = {}; //data to ajax to server
+
+        try{
+            //get circuit name
+            data["Name"] = wires[i].match(/(?<=name=")[a-z0-9]*/gmi)[0];
+
+            //get inputs/outputs
+            let inputList = wires[i].match(/(?<=inputs:)[a-z*\-0-9="<>,]*(?=outputs)/gmi);
+            let outputList = wires[i].match(/(?<=outputs:)[a-z*\-0-9="<>,]*(?=})/gmi);
+
+            //break apart input strings
+            data["Inputs"] = [];
+            let inputs = inputList[0].split(",");
+            for (let i = 0; i < inputs.length; i++)
+            {
+                let it = {};
+                it["ID"] = inputs[i].match(/[a-z\-0-9]*(?=[<=>][<=>])/gmi)[0];
+                it["Sign"] = inputs[i].match(/[=><]=/gmi)[0];
+
+                it["Value"] = inputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
+
+                data["Inputs"].push(it);
+            }
+            
+            //break apart output strings
+            data["Outputs"] = [];
+            let outputs = outputList[0].split(",");
+            for (let i = 0; i < outputs.length; i++)
+            {
+                let o = {};
+                o["ID"] = outputs[i].match(/[a-z\-0-9]*(?==)/gmi)[0];
+                o["Value"] = outputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
+
+                data["Outputs"].push(o);
+            }
+        }
+        catch (error)
+        {
+            //code failed parsing
+            $("#status").html("Error: code failed parsing");
+            return;
+        }
+
+        //send code away
+        AjaxRequest("./svc/devices/program", "POST", data, "json", HandleStatus, ErrorHandler);
+    } 
 }

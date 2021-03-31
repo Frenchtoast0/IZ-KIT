@@ -1,0 +1,8 @@
+[31-Mar-2021 14:45:32 MST] PHP Parse error:  syntax error, unexpected '$_SESSION' (T_VARIABLE) in /home/izkit/public_html/functions/userFunctions.php on line 152
+[31-Mar-2021 14:46:43 MST] PHP Warning:  include_once(./inc/db.php): failed to open stream: No such file or directory in /home/izkit/public_html/functions/userFunctions.php on line 7
+[31-Mar-2021 14:46:43 MST] PHP Warning:  include_once(): Failed opening './inc/db.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/izkit/public_html/functions/userFunctions.php on line 7
+[31-Mar-2021 14:46:43 MST] PHP Warning:  fopen(/home/izkit/Programs/1/code.txt): failed to open stream: No such file or directory in /home/izkit/public_html/functions/userFunctions.php on line 153
+[31-Mar-2021 15:01:53 MST] PHP Parse error:  syntax error, unexpected '}' in /home/izkit/public_html/functions/userFunctions.php on line 158
+[31-Mar-2021 15:03:02 MST] PHP Warning:  include_once(./inc/db.php): failed to open stream: No such file or directory in /home/izkit/public_html/functions/userFunctions.php on line 7
+[31-Mar-2021 15:03:02 MST] PHP Warning:  include_once(): Failed opening './inc/db.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/izkit/public_html/functions/userFunctions.php on line 7
+[31-Mar-2021 15:03:02 MST] PHP Warning:  fopen(/home/izkit/Programs/1/code.txt): failed to open stream: No such file or directory in /home/izkit/public_html/functions/userFunctions.php on line 153

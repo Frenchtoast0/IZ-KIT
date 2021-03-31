@@ -24,19 +24,30 @@ h1{
     padding-top: 3%;
 }
 
-#MainBox{
-    width: 60%;
-    margin: auto
+/*make inputs mobile friendly*/
+@media screen and (min-width: 600px)
+{
+    form input[type="text"], input[type="password"]
+    {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #code{
+        width: 40vw;
+    }
+}
+@media screen and (min-width: 1000px)
+{
+    form input[type="text"], input[type="password"]
+    {
+        width: 40%;
+        margin: 0 auto;
+    }
 }
 
 .up-a-bit{
     margin-top: -2px;
-}
-
-#program{
-    height: 70vh;
-    width: 25vw;
-    margin: auto;
 }
 
 .alert{
@@ -44,12 +55,16 @@ h1{
     width: 100%;
 }
 
-#code{
-    height: 65vh;
-    width: 30vw;
-    margin-left: auto;
-    margin-right: auto;
+#status{
     font-family: 'Roboto Mono', monospace;
+}
+
+#code{
+    font-family: 'Roboto Mono', monospace;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    height: 60vh;
 }
 
 a{
@@ -58,9 +73,16 @@ a{
 
 #deviceTable{
     color:white;
+    border: lightgray solid .1px;
+    border-collapse: collapse;
 }
 #deviceTable thead{
     background-color: rgb(15, 29, 70);
+    border: lightgray solid .1px;
+}
+#deviceTable td{
+    border: lightgray solid .1px;
+    padding: 7px;
 }
 #deviceTable tbody tr:nth-child(even)
 {

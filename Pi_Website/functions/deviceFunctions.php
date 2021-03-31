@@ -48,21 +48,29 @@ function UpdateDevice($postData)
 }
 */
 
-//uploads a new program to the devices
-//$wire - program connection info
+//uploads a new circuit to the device db
+//$wire - circuit to parse
 //return - successfulness of create
 function UploadProgram($wire)
 {
-    $data = array(); //json data value
-    $status = false; //json success value
+    global $mysqli;
+
+    $data = array(); //JSON response object
 
     //get circuit name
     $name = $wire["Name"];
 
     //setup circuit on sql end
     $query = "INSERT INTO Circuits (Name) VALUES ('$name')";
-    SQLi_NonQuery($query);
-    $circuitID = SQLi_InsertID();
+    if (SQLi_NonQuery($query) > 0) //check for errors
+    {
+        $circuitID = SQLi_InsertID();
+    }    
+    else
+    {
+        $data["status"] = "Error: " . $mysqli->error;
+        return $data;
+    }
 
     //get inputs
     foreach($wire["Inputs"] as $input)
@@ -71,16 +79,25 @@ function UploadProgram($wire)
         $sign = $input["Sign"];
         $value = $input["Value"]; 
 	
-	    error_log(join($input,','));
-	    error_log($sign); 
         //sql insert input
         $query = "INSERT INTO Input (DevID, Sign, OnVal) VALUES ('$id', '$sign', '$value')";
-        SQLi_NonQuery($query);
-        $inputID = SQLi_InsertID();
+        if (SQLi_NonQuery($query) > 0) //check for errors
+        {
+            $inputID = SQLi_InsertID();
+        }    
+        else
+        {
+            $data["status"] = "Error: " . $mysqli->error;
+            return $data;
+        } 
 
         //insert connection to circuit
         $query = "INSERT INTO CircuitToInput (InID, CrID) VALUES ('$inputID', '$circuitID')";
-        SQLi_NonQuery($query);
+        if (SQLi_NonQuery($query) < 1) //check for errors
+        {
+            $data["status"] = "Error: " . $mysqli->error;
+            return $data;
+        }
     }
 
     //get outputs
@@ -91,19 +108,69 @@ function UploadProgram($wire)
 
         //sql insert
         $query = "INSERT INTO Output (DevID, SetVal) VALUES ('$id', '$value')";
-        SQLi_NonQuery($query);
-        $outputID = SQLi_InsertID();
+        if (SQLi_NonQuery($query) > 0) //check for errors
+        {
+            $outputID = SQLi_InsertID();
+        }    
+        else
+        {
+            $data["status"] = "Error: " . $mysqli->error;
+            return $data;
+        } 
 
         //insert connection to circuit
         $query = "INSERT INTO CircuitToOutput (OtID, CrID) VALUES ('$outputID', '$circuitID')";
-        SQLi_NonQuery($query);
+        if (SQLi_NonQuery($query) < 1) //check for errors
+        {
+            $data["status"] = "Error: " . $mysqli->error;
+            return $data;
+        }
     }
 
-    //package and send function values
-    $response["data"] = $data;
-
-    return $response;
+    //no errors
+    $data["status"] = "Successfully uploaded";
+    return $data;
 }
+/*//regex splits wire into manageable block
+//returns - $wire as associative array
+function ParseWire($wire)
+{
+    //get inputs/outputs
+    preg_match_all('/(?<=inputs:).*(?=outputs)/gmi', $wire, $inputList);
+    preg_match_all('/(?<=outputs:).*(?=})/gmi', $wire, $outputList);
+
+    //break apart input strings
+    $data["Inputs"] = array();
+    $inputs = preg_split('/\,/', $inputList);
+    for ($i = 0; $i < count($inputs); $i++)
+    {
+        $it = array();
+        preg_match('/[a-z\-0-9]*(?=[<=>][<=>])/gmi', $inputs[$i], $val);
+        $it["ID"] = $val;
+        preg_match('/[=><]=/gmi', $inputs[$i], $val);
+        $it["Sign"] = $val;
+        preg_match('/(?<=")[a-z0-9]*(?=")/gmi', $inputs[$i], $val);
+        $it["Value"] = $val;
+
+        $data["Inputs"][] = $it;
+    }
+    
+    //break apart output strings
+    $data["Outputs"] = array();
+    $outputs = preg_split("/\,/", $outputList[0]);
+    for ($i = 0; $i < count($outputs); $i++)
+    {
+        $o = array();
+        preg_match('/[a-z\-0-9]*(?==)/gmi', $outputs[$i], $val);
+        $o["ID"] = $val;
+        preg_match('/(?<=")[a-z0-9]*(?=")/gmi', $outputs[$i], $val);
+        $o["Value"] = $val;
+
+        $data["Outputs"][] = $o;
+    }
+
+    return $inputList[0];
+}*/
 
 //returns a list of the devices in the db
 //return - json list of device state table

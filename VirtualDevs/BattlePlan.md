@@ -30,7 +30,7 @@ class Device:
     
     def checkUpdate():
         #this is going to be a none blocking socket its eaiser that way
-        #becuase it will wait untill everything is avabile and then go on its merry way
+        #becuase it will wait until everything is avabile and then go on its merry way
     
     #py props https://docs.python.org/3/library/functions.html#property
     def setValue

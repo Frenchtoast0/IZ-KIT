@@ -1,6 +1,6 @@
 <?php
 require_once "../rest.api.php";  // include our base abstract class
-require_once "../../functions/userFunctions.php"; //connect to user functionality
+require_once "../../functions/userREST.php"; //connect to user functionality
 
 session_start(); //allow reading of session variable
 
@@ -43,6 +43,24 @@ class MyAPI extends API {
     if ($this->method == "GET")
     {
       return LoadProgram();  
+    } 
+  }
+
+  //change admin lock state
+  protected function manage(){
+    $resp["method"] = $this->method;
+    $resp["request"] = $this->request;
+    $resp["putfile"] = $this->file;
+    $resp["verb"] = $this->verb;
+    $resp["args"] = $this->args;
+
+    if ($this->method == "GET")
+    {
+      return GetUsers();  
+    } 
+    else if ($this->method == "POST")
+    {
+      return DeleteUser($this->request);  
     } 
   }
 }

@@ -17,14 +17,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/admin.js"></script>
     <script src="./js/ajax.js"></script>
-    <title>IZ-Kit Program</title>
+    <title>IZ-Kit Admin</title>
 </head>
 <body class="text-center text-white bg-dark">
     <section class="space-top-little">
         <h1>Admin Panel <button class="btn btn-primary" id="refresh"><img height="32" width="32" src="./img/refresh.png"></button></h1>
 
         <div class="container">
-            <table id="deviceTable" class="table-responsive mx-auto">
+            <table id="deviceTable" class="table-responsive mx-auto tableStyle">
                 <thead>
                     <tr>
                         <td scope="col">Device ID</td>

@@ -71,24 +71,24 @@ a{
     text-decoration: none;
 }
 
-#deviceTable{
+.tableStyle{
     color:white;
     border: lightgray solid .1px;
     border-collapse: collapse;
 }
-#deviceTable thead{
+.tableStyle thead{
     background-color: rgb(15, 29, 70);
     border: lightgray solid .1px;
 }
-#deviceTable td{
+.tableStyle td{
     border: lightgray solid .1px;
     padding: 7px;
 }
-#deviceTable tbody tr:nth-child(even)
+.tableStyle tbody tr:nth-child(even)
 {
     background-color: gray;
 }
-#deviceTable tbody tr:nth-child(odd)
+.tableStyle tbody tr:nth-child(odd)
 {
     background-color: rgb(88, 88, 88);
 }

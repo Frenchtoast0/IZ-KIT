@@ -2,9 +2,9 @@
 //************************************************
 // File: userFunctions.php
 // Description: collection of user functions
-//              to interface with db
+//              to interface with db without REST
 //************************************************
-include_once "./inc/db.php";
+require_once "./inc/db.php";
 
 //enable access to the session
 session_start();
@@ -141,65 +141,4 @@ function ValidateUser($params)
     //send back updated parameters
     return $params;
 }
-
-//Saves sent text contents to file in user's directory
-//returns - success/fail
-function SaveProgram($json)
-{
-    $data = array(); //json response
-    
-    $path = "/home/izkit/Programs/". $_SESSION["userID"];
-    $filename =  $path . "/code.txt";
-
-    //make sure directory exists
-    if (!is_dir($path)) mkdir($path, 0755);
-
-    //save file
-    if ($file = fopen($filename, "w"))
-    {
-        fwrite($file, $json["code"]);
-        $data["status"] = "Successfully saved program";
-        fclose($file);
-    }
-    else
-    {
-        $data["status"] = "Save failed";
-    }
-        
-    return $data;
-}
-
-//Loads text contents from file in user's directory
-//returns - text contents
-function LoadProgram()
-{
-    $data = array(); //json response
-
-    $filename = "/home/izkit/Programs/" . $_SESSION["userID"] . "/code.txt";
-
-    //check if file exists
-    if (!file_exists($filename))
-    {
-        $data["status"] = "No saved program exists";
-        $data["code"] = "";
-    }
-    else
-    {
-        //open file
-        if ($file = fopen($filename, "rb"))
-        {
-            $data["code"] = fread($file, filesize($filename));
-            fclose($file);
-            $data["status"] = "Successfully loaded program";
-        }
-        else
-        {
-            $data["status"] = "Load failed";
-            $data["code"] = "";
-        }
-    }
-
-    return $data;
-}
-
 ?>

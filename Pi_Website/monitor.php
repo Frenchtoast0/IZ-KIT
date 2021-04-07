@@ -19,16 +19,11 @@
 </head>
 <body class="text-center text-white bg-dark">
     <section class="space-top-little">
-        <h1>Index Page</h1>
+        <h1>Server Monitor</h1>
 
-        <h4><a href="./program.php">Program Page</a></h4>
-        <h4><a href="./admin.php">Admin Panel</a></h4>
-        <h4><a href="./server.php">Server Monitor</a></h4>
-        <h4><a href="./accounts.php">Accounts</a></h4>
-        
-        <form method="POST" action="./login.php">
-            <button type="submit" class="btn btn-md btn-primary mt-1" name="submit" value="Logout">Logout</button>
-        </form>
+        <textarea id="code" class="form-control no-focus-border mt-1 mx-auto" readonly="true" autofocus="true"></textarea>
+        <a href="./index.php">Back</a>
+
         <p class="text-muted mt-3">&copy; IZ-Kit 2021</p>
     </section>
 </body>

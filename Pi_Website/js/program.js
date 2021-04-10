@@ -226,8 +226,8 @@ function UploadCode()
             data["Name"] = wires[i].match(/(?<=name=")[a-z0-9]*/gmi)[0];
 
             //get inputs/outputs
-            let inputList = wires[i].match(/(?<=inputs:)[a-z*\-0-9="<>,]*(?=outputs)/gmi);
-            let outputList = wires[i].match(/(?<=outputs:)[a-z*\-0-9="<>,]*(?=})/gmi);
+            let inputList = wires[i].match(/(?<=inputs:)[a-z*\-0-9="<>,!_:]*(?=outputs)/gmi);
+            let outputList = wires[i].match(/(?<=outputs:)[a-z*\-0-9="<>,!_:]*(?=})/gmi);
 
             //break apart input strings
             data["Inputs"] = [];
@@ -238,7 +238,7 @@ function UploadCode()
                 it["ID"] = inputs[i].match(/[a-z\-0-9]*(?=[<=>][<=>])/gmi)[0];
                 it["Sign"] = inputs[i].match(/[=><]=/gmi)[0];
 
-                it["Value"] = inputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
+                it["Value"] = inputs[i].match(/(?<=")[a-z0-9,!:_-]*(?=")/gmi)[0];
 
                 data["Inputs"].push(it);
             }
@@ -250,7 +250,7 @@ function UploadCode()
             {
                 let o = {};
                 o["ID"] = outputs[i].match(/[a-z\-0-9]*(?==)/gmi)[0];
-                o["Value"] = outputs[i].match(/(?<=")[a-z0-9]*(?=")/gmi)[0];
+                o["Value"] = outputs[i].match(/(?<=")[a-z0-9,!:_-]*(?=")/gmi)[0];
 
                 data["Outputs"].push(o);
             }

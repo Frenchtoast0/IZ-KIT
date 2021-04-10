@@ -41,7 +41,16 @@ void loop()
     if (newState != state)
     {
       state = newState;
-      LCD_Display(state);
+
+      //show empty display
+      if (state == "Disconnected" || state == "Initial")
+      {
+        LCD_Display("");
+      }
+      else
+      {
+        LCD_Display(state);
+      }
     }
   }
 

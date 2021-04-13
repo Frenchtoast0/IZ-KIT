@@ -39,16 +39,23 @@ void RGB_Init()
 //returns bool - success or fail
 bool RGB_Change(String value)
 {
+    //clear initially
+    if (value == "Initial")
+    {
+        RGB_Color(0,0,0);
+        return true;
+    }
+
     //check value length
     if (value.length() != 12) return false;
 
     //get values from string
     int redVal = value.substring(1,3).toInt();
-    //if (redVal < 0 || redVal > 255) return false;
+    if (redVal < 0 || redVal > 255) return false;
     int greenVal = value.substring(5,7).toInt();
-    //if (greenVal < 0 || greenVal > 255) return false;
+    if (greenVal < 0 || greenVal > 255) return false;
     int blueVal = value.substring(9,11).toInt();
-    //if (blueVal < 0 || blueVal > 255) return false;
+    if (blueVal < 0 || blueVal > 255) return false;
 
     //change color
     RGB_Color(redVal, greenVal, blueVal);

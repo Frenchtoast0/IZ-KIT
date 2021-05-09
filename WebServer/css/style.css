@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+/*font-family: 'Russo One', 'Arial', sans-serif;*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+/*font-family: 'Roboto Mono', monospace;*/
+
+html, body{
+    height: 100%;
+}
+
+body{
+    background-color: lightgray;
+}
+
+h1{
+    font-family: 'Russo One', 'Arial', sans-serif;
+}
+
+.space-top{
+    padding-top: 10%;
+}
+
+.space-top-little{
+    padding-top: 3%;
+}
+
+/*make inputs mobile friendly*/
+@media screen and (min-width: 600px)
+{
+    form input[type="text"], input[type="password"]
+    {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #code{
+        width: 40vw;
+    }
+}
+@media screen and (min-width: 1000px)
+{
+    form input[type="text"], input[type="password"]
+    {
+        width: 40%;
+        margin: 0 auto;
+    }
+}
+
+.up-a-bit{
+    margin-top: -2px;
+}
+
+.alert{
+    position: absolute;
+    width: 100%;
+}
+
+#status{
+    font-family: 'Roboto Mono', monospace;
+}
+
+#code{
+    font-family: 'Roboto Mono', monospace;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    height: 60vh;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tableStyle{
+    color:white;
+    border: lightgray solid .1px;
+    border-collapse: collapse;
+}
+.tableStyle thead{
+    background-color: rgb(15, 29, 70);
+    border: lightgray solid .1px;
+}
+.tableStyle td{
+    border: lightgray solid .1px;
+    padding: 7px;
+}
+.tableStyle tbody tr:nth-child(even)
+{
+    background-color: gray;
+}
+.tableStyle tbody tr:nth-child(odd)
+{
+    background-color: rgb(88, 88, 88);
+}
+#server{
+    text-align: left;
+    width: fit-content;
+}
